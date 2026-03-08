@@ -7,6 +7,18 @@ class WeatherController < ApplicationController
         weather = Weather.where(state: params[:state].downcase) if params[:state].present?
         weather = Weather.where(created_at: params[:date]) if params[:date].present?
 
+        if params[:sort].present?
+            if params[:sort] == 'date'
+                weather = weather.order(created_at: :asc)
+            elsif params[:sort] == '-date'
+                weather = weather.order(created_at: :desc)
+            elsif params[:sort] == 'city'
+                weather = weather.order(city: :asc)
+            elsif params[:sort] == '-city'
+                weather = weather.order(city: :desc)
+            end
+        end
+
         render json: {result: weather}, status: :ok
     end
 
