@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_25_064806) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_09_095634) do
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.string "author"
+    t.string "genre"
+    t.decimal "rating"
+    t.integer "published_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "weathers", force: :cascade do |t|
     t.decimal "lat", precision: 10, scale: 4
     t.decimal "lon", precision: 10, scale: 4

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get "/weather",  to: "weather#list"
   post "/weather", to: "weather#create"
   get '/weather/:id', to: "weather#show"
+
+  resources :books, only: [:index, :show, :create]
   # Defines the root path route ("/")
   # root "posts#index"
 end

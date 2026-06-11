@@ -3,9 +3,10 @@ class WeatherController < ApplicationController
     def list
         weather = Weather.all 
         
-        weather = Weather.where(city: params[:city].downcase) if params[:city].present?
-        weather = Weather.where(state: params[:state].downcase) if params[:state].present?
-        weather = Weather.where(created_at: params[:date]) if params[:date].present?
+        # weather = Weather.where(city: params[:city].downcase) if params[:city].present?
+        weather = Weather.where("LOWER(city) = ?", params[:city].downcase).first if params[:city].present?
+        weather = Weather.where("LOWER(state) = ?", params[:state].downcase).first if params[:state].present?
+        weather = Weather.where(created_at: params[:date]).first if params[:date].present?
 
         if params[:sort].present?
             if params[:sort] == 'date'
